@@ -8,7 +8,7 @@ add_subdirectory(cmake/gtest)
 add_subdirectory(cmake/approvaltests)
 add_subdirectory(cmake/fmt)
 
-add_compile_options(-Wall -Wextra -pedantic -Werror)
+#add_compile_options(-Wall -Wextra -pedantic -Werror)
 
 add_executable(tests
   tests/experiments.cpp

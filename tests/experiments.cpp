@@ -1,4 +1,7 @@
 #include <ApprovalTests.hpp>
+#include <fmt/format.h>
+#include <fmt/ostream.h>
+#include <fmt/ranges.h>
 #include <gtest/gtest.h>
 
 using ApprovalTests::Approvals;
@@ -7,9 +10,10 @@ struct Custom {
   int value;
 };
 
-std::ostream& operator<<(std::ostream& os, const Custom& obj) {
-  os << "Custom { .x = " << obj.value << " }";
-  return os;
+template <> std::string ApprovalTests::StringUtils::toString(const Custom& obj) {
+  std::stringstream ss;
+  ss << "Custom { .x = " << obj.value << " }";
+  return ss.str();
 }
 
 TEST(Verify, FormatInt) {
@@ -27,10 +31,10 @@ TEST(Verify, FormatCustom) {
   Approvals::verify(x);
 }
 
-// TEST(Verify, FormatVector) {
-//  std::vector<int> x{{1, 2, 3}};
-//  Approvals::verify(x);
-//}
+TEST(Verify, FormatVector) {
+  std::vector<int> x{{1, 2, 3}};
+  Approvals::verify(x);
+}
 
 TEST(VerifyAll, FormatAllInt) {
   std::vector<int> xs{{1, 2, 3}};
@@ -39,9 +43,9 @@ TEST(VerifyAll, FormatAllInt) {
 
 TEST(VerifyAll, FormatAllCustom) {
   std::vector<Custom> xs{{
-      Custom { .value = 1 },
-      Custom { .value = 2 },
-      Custom { .value = 3 },
+      Custom{.value = 1},
+      Custom{.value = 2},
+      Custom{.value = 3},
   }};
   Approvals::verifyAll(xs);
 }
