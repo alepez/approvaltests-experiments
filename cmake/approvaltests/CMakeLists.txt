@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8)
 
-# Download and unpack googletest at configure time
+# Download and unpack approvaltests at configure time
 configure_file(CMakeLists.txt.in approvaltests-download/CMakeLists.txt)
 
 execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
