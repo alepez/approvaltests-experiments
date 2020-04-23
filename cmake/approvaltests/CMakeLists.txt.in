@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.8)
+
+project(approvaltests-download NONE)
+
+include(ExternalProject)
+ExternalProject_Add(approvaltests
+  GIT_REPOSITORY    https://github.com/approvals/ApprovalTests.cpp.git
+  GIT_TAG           v.8.6.0
+  SOURCE_DIR        "${CMAKE_CURRENT_BINARY_DIR}/approvaltests-src"
+  BINARY_DIR        "${CMAKE_CURRENT_BINARY_DIR}/approvaltests-build"
+  CONFIGURE_COMMAND ""
+  BUILD_COMMAND     ""
+  INSTALL_COMMAND   ""
+  TEST_COMMAND      ""
+)

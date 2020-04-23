@@ -1,0 +1,4 @@
+[0] = Custom { .x = 1 }
+[1] = Custom { .x = 2 }
+[2] = Custom { .x = 3 }
+
