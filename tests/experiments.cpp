@@ -3,8 +3,11 @@
 #include <fmt/ostream.h>
 #include <fmt/ranges.h>
 #include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
 using ApprovalTests::Approvals;
+using ApprovalTests::StringUtils;
+using namespace testing;
 
 struct Custom {
   int value;
@@ -33,7 +36,7 @@ TEST(Verify, FormatCustom) {
 
 TEST(Verify, FormatVector) {
   std::vector<int> x{{1, 2, 3}};
-  Approvals::verify(x);
+  Approvals::verify(fmt::to_string(x));
 }
 
 TEST(VerifyAll, FormatAllInt) {
@@ -48,4 +51,9 @@ TEST(VerifyAll, FormatAllCustom) {
       Custom{.value = 3},
   }};
   Approvals::verifyAll(xs);
+}
+
+TEST(VerifyAll, FormatVector) {
+  std::vector<std::vector<int>> xs{{1, 2}, {3, 4}, {5, 6}};
+  Approvals::verifyAll("", xs, [](const auto& contents, std::ostream& os) { fmt::print(os, "{}", contents); });
 }
